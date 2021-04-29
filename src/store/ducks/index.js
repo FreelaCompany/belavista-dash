@@ -6,7 +6,7 @@ import { reducer as produtosList } from "./produtos-list";
 import { reducer as produtosCadastro } from "./produtos-cadastro";
 import { reducer as bannerList } from "./banner-list";
 import { reducer as bannerCadastro } from "./banner-cadastro";
-import { reducer as curriculosList } from "./curriculos-list";
+import { reducer as contatosList } from "./contatos-list";
 import { reducer as arquitetosList } from "./arquitetos-list";
 import { reducer as arquitetosCadastro } from "./arquitetos-cadastro";
 import { reducer as ambientesList } from "./ambientes-list";
@@ -20,7 +20,7 @@ const reducers = combineReducers({
   produtosCadastro,
   bannerList,
   bannerCadastro,
-  curriculosList,
+  contatosList,
   arquitetosList,
   arquitetosCadastro,
   ambientesList,

@@ -8,7 +8,7 @@ import {
   AiFillTags,
   AiFillFileImage,
   AiOutlineIdcard,
-  AiFillFileText,
+  AiFillMail,
   AiFillPicture,
 } from "react-icons/ai";
 
@@ -49,9 +49,9 @@ export default function Sidebar() {
             elemBefore: () => <AiOutlineIdcard />,
           },
           {
-            title: "Currículos",
-            itemId: "/curriculos",
-            elemBefore: () => <AiFillFileText />,
+            title: "Contatos",
+            itemId: "/contatos",
+            elemBefore: () => <AiFillMail />,
           },
           {
             title: "Ambientes",

@@ -156,3 +156,21 @@ export const Arquivo = styled.div`
     }
   }
 `;
+
+export const NomeMensagem = styled.h2`
+  color: #000;
+  font-size: 24px;
+  margin: 25px 0;
+`;
+
+export const DivContatos = styled.div`
+  color: #000;
+  font-size: 16px;
+  margin: 10px 0;
+`;
+
+export const Mensagem = styled.p`
+  color: #000;
+  font-size: 16px;
+  margin: 10px 0;
+`;

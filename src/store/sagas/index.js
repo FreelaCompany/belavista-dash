@@ -42,9 +42,9 @@ import { ListBannerTypes } from "../ducks/banner-list";
 import { CadastroBannerTypes } from "../ducks/banner-cadastro";
 import { listBanner, cadastroBanner, deleteBanner, editBanner } from "./banner";
 
-//curriculos-list
-import { ListCurriculosTypes } from "../ducks/curriculos-list";
-import { listCurriculos, deleteCurriculos } from "./curriculos";
+//contatos-list
+import { ListContatosTypes } from "../ducks/contatos-list";
+import { listContatos, deleteContatos } from "./contatos";
 
 export default function* rootSaga() {
   yield all([
@@ -92,7 +92,7 @@ export default function* rootSaga() {
     takeLatest(CadastroBannerTypes.EDIT_BANNER_REQUEST, editBanner),
 
     //curriculos
-    takeLatest(ListCurriculosTypes.LIST_CURRICULOS_REQUEST, listCurriculos),
-    takeLatest(ListCurriculosTypes.DELETE_CURRICULOS_REQUEST, deleteCurriculos),
+    takeLatest(ListContatosTypes.LIST_CONTATOS_REQUEST, listContatos),
+    takeLatest(ListContatosTypes.DELETE_CONTATOS_REQUEST, deleteContatos),
   ]);
 }

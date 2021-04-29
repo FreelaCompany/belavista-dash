@@ -6,7 +6,7 @@ import Auth from "../pages/Auth";
 import Produtos from "../pages/Produtos";
 import Banner from "../pages/Banner";
 import Arquitetos from "../pages/Arquitetos";
-import Curriculos from "../pages/Curriculos";
+import Contatos from "../pages/Contatos";
 import Ambientes from "~/pages/Ambientes";
 
 export default function Routes() {
@@ -35,7 +35,7 @@ export default function Routes() {
       <Route path="/produtos" exact component={Produtos} />
       <Route path="/banner" exact component={Banner} />
       <Route path="/arquitetos" exact component={Arquitetos} />
-      <Route path="/curriculos" exact component={Curriculos} />
+      <Route path="/contatos" exact component={Contatos} />
       <Route path="/ambientes" exact component={Ambientes} />
     </Switch>
   );

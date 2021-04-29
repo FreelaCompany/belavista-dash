@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineDelete } from "react-icons/ai";
-import ListCurriculosActions from "../../store/ducks/curriculos-list";
+import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
+import ListContatoActions from "../../store/ducks/contatos-list";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,37 +14,52 @@ import TableScrollbar from "react-table-scrollbar";
 
 import { PageContainer } from "../../styles/components";
 
-import { Container, TableHeader } from "./styles";
+import {
+  Container,
+  TableHeader,
+  NomeMensagem,
+  DivContatos,
+  Mensagem,
+} from "./styles";
 
 import Sidebar from "../../components/Sidebar";
 
-export default function Banner() {
+export default function Contatos() {
   const dispatch = useDispatch();
-  const { data: dataCurriculos, successDelete, loadingDelete } = useSelector(
-    (state) => state.curriculosList
+  const { data: dataContatos, successDelete, loadingDelete } = useSelector(
+    (state) => state.contatosList
   );
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [curriculoId, setCurriculoId] = useState(null);
+  const [contatoId, setContatoId] = useState(null);
+  const [showView, setShowView] = useState(false);
+  const [contatoView, setContatoView] = useState(null);
 
-  async function handleListCurriculos() {
-    dispatch(ListCurriculosActions.listCurriculosRequest());
+  const handleCloseView = () => setShowView(false);
+
+  async function handleListContatos() {
+    dispatch(ListContatoActions.listContatosRequest());
   }
 
   useEffect(() => {
-    handleListCurriculos();
+    handleListContatos();
   }, [successDelete]);
 
-  function handleDeleteConfirm(news) {
-    setCurriculoId(news);
+  function handleDeleteConfirm(id) {
+    setContatoId(id);
     setShowDeleteConfirm(true);
   }
 
   async function handleDelete(id) {
     try {
-      dispatch(ListCurriculosActions.deleteCurriculosRequest(id));
+      dispatch(ListContatoActions.deleteContatosRequest(id));
     } catch (err) {
       console.log(err.message);
     }
+  }
+
+  function handleView(contato) {
+    setContatoView(contato);
+    setShowView(true);
   }
 
   useEffect(() => {
@@ -70,30 +85,25 @@ export default function Banner() {
               </tr>
             </thead>
             <tbody>
-              {dataCurriculos?.map((curriculo, index) => (
+              {dataContatos?.map((contato, index) => (
                 <tr key={index}>
-                  <td>{curriculo.nome}</td>
-                  <td>{curriculo.email}</td>
-                  <td>{curriculo.telefone}</td>
+                  <td>{contato.nome}</td>
+                  <td>{contato.email}</td>
+                  <td>{contato.telefone}</td>
                   <td>
-                    {format(parseISO(curriculo.data_cadastro), "dd/MM/yyyy")}
+                    {format(parseISO(contato.data_cadastro), "dd/MM/yyyy")}
                   </td>
                   <td>
                     <div>
-                      <Button>
-                        <a
-                          href={curriculo.curriculo}
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          Baixar currículo
-                        </a>
-                      </Button>
+                      <AiOutlineEye
+                        size={25}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleView(contato)}
+                      />
                       <AiOutlineDelete
                         size={25}
                         style={{ cursor: "pointer" }}
-                        onClick={() =>
-                          handleDeleteConfirm(curriculo.id_curriculo)
-                        }
+                        onClick={() => handleDeleteConfirm(contato.id_contato)}
                       />
                     </div>
                   </td>
@@ -111,7 +121,7 @@ export default function Banner() {
         size="lg">
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "#000" }}>
-            Tem certeza que deseja deletar esse currículo?
+            Tem certeza que deseja deletar esse contato?
           </Modal.Title>
         </Modal.Header>
         <Modal.Footer>
@@ -120,8 +130,26 @@ export default function Banner() {
             onClick={() => setShowDeleteConfirm(false)}>
             Não
           </Button>
-          <Button variant="primary" onClick={() => handleDelete(curriculoId)}>
+          <Button variant="primary" onClick={() => handleDelete(contatoId)}>
             {loadingDelete ? "Deletando.." : "Sim"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showView} onHide={handleCloseView} centered size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title style={{ color: "#000" }}>Vizualização</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <NomeMensagem>{contatoView?.nome}</NomeMensagem>
+          <DivContatos>
+            E-mail: {contatoView?.email} - Telefone: {contatoView?.telefone}
+          </DivContatos>
+          <Mensagem>{contatoView?.mensagem}</Mensagem>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseView}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

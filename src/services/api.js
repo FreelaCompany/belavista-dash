@@ -5,8 +5,8 @@ const headers = {
 };
 
 const api = axios.create({
-  // baseURL: "http://ubamoveis-api.herokuapp.com",
-  baseURL: "http://localhost:3333",
+  // baseURL: "http://localhost:3333/",
+  baseURL: "https://casabelavista-api.herokuapp.com/",
   headers,
 });
 
